@@ -18,6 +18,9 @@ apt-get -y install python3-dev python3-setuptools python3-pip
 apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 apt-get -y install libgtk-3-dev libpulse-dev
 
+# git speed up in China
+git config --global url."https://hub.gitfast.tk/".insteadOf "https://github.com/"
+
 gem install android-sdk-installer
 
 # # Use Python3.7. Python3.8 has bugs with P4A
@@ -59,7 +62,8 @@ git clone https://github.com/mobile-insight/mobileinsight-core.git
 git clone https://github.com/mobile-insight/mobileinsight-mobile.git
 
 # Clone python-for-android repo
-git clone https://github.com/mobile-insight/python-for-android.git
+# git clone https://github.com/mobile-insight/python-for-android.git
+git clone https://github.com/VLiu7/python-for-android.git
 # git clone -b dev-mi5 https://github.com/mobile-insight/python-for-android.git
 # git clone -b p4a-MI https://github.com/luckiday/python-for-android.git
 
@@ -83,10 +87,11 @@ debug: true
 ignore_existing: true
 components:
   - platform-tools
-  - build-tools;27.0.3
+  - build-tools;28.0.2
   - platforms;android-27
   - extras;android;m2repository
 EOF
+
 
 # Download and setup Android SDK
 # Based on https://github.com/Commit451/android-sdk-installer
@@ -104,12 +109,12 @@ echo 'ANDROID_SDK_HOME=/home/vagrant/android-sdk' >> ~/.bashrc
 
 # Download and setup Android NDK r19
 cd ~
-wget https://dl.google.com/android/repository/android-ndk-r19b-linux-x86_64.zip
-unzip android-ndk-r19b-linux-x86_64.zip
-echo 'ANDROID_NDK_HOME=/home/vagrant/android-ndk-r19b' >> ~/.bashrc
+wget https://dl.google.com/android/repository/android-ndk-r25c-linux-x86_64.zip
+unzip android-ndk-r25c-linux-x86_64.zip
+echo 'ANDROID_NDK_HOME=/home/vagrant/android-ndk-r25c' >> ~/.bashrc
 echo 'PATH=$PATH:$ANDROID_NDK_HOME:$ANDROID_SDK_HOME:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/tools/bin:$ANDROID_SDK_HOME/platform-tools' >> ~/.bashrc
 source ~/.bashrc
-rm android-ndk-r19b-linux-x86_64.zip
+rm android-ndk-r25c-linux-x86_64.zip
 
 # Install python-for-android
 cd /home/vagrant/mi-dev/python-for-android
@@ -137,8 +142,9 @@ SCRIPT
 Vagrant.configure(2) do |config|
   # config.vm.box = "bento/ubuntu-16.04"
   # config.vm.box_version = "201708.22.0"
+  # config.vm.box = "bento/ubuntu-20.04"
   config.vm.box = "bento/ubuntu-20.04"
-  config.vm.box_version = "202004.27.0"
+  # config.vm.box_version = "202004.27.0"
 
   config.vm.provider "virtualbox" do |vb|
     # # Display the VirtualBox GUI when booting the machine
