@@ -143,7 +143,7 @@ Vagrant.configure(2) do |config|
   # config.vm.box = "bento/ubuntu-16.04"
   # config.vm.box_version = "201708.22.0"
   # config.vm.box = "bento/ubuntu-20.04"
-  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box = "bento/ubuntu-22.04"
   # config.vm.box_version = "202004.27.0"
 
   config.vm.provider "virtualbox" do |vb|
