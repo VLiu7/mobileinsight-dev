@@ -16,10 +16,9 @@ update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 apt-get -y install python-dev python-setuptools python-wxgtk3.0
 apt-get -y install python3-dev python3-setuptools python3-pip
 apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
+apt-get -y install libc6 libncurses5 libstdc++6 lib32z1 libbz2-1.0
 apt-get -y install libgtk-3-dev libpulse-dev
 
-# git speed up in China
-git config --global url."https://hub.gitfast.tk/".insteadOf "https://github.com/"
 
 gem install android-sdk-installer
 
@@ -49,17 +48,18 @@ SCRIPT
 
 
 $CLONE_REPOS = <<SCRIPT
+
 # Create MobileInsight dev folder at /home/vagrant/mi-dev
 mkdir /home/vagrant/mi-dev
 cd /home/vagrant/mi-dev
 
 # Clone MobileInsight-core repo
 # git clone -b dev-py3 https://github.com/mobile-insight/mobileinsight-core.git
-git clone https://github.com/mobile-insight/mobileinsight-core.git
+git clone -b ubuntu22-py310 https://github.com/mobile-insight/mobileinsight-core.git
 
 # Clone MobileInsight-mobile repo
 # git clone -b dev-py3 https://github.com/mobile-insight/mobileinsight-mobile.git
-git clone https://github.com/mobile-insight/mobileinsight-mobile.git
+git clone https://github.com/VLiu7/mobileinsight-mobile.git
 
 # Clone python-for-android repo
 # git clone https://github.com/mobile-insight/python-for-android.git
@@ -79,7 +79,6 @@ SCRIPT
 
 
 $COMPILE_APK = <<SCRIPT
-# Config Android SDK download script
 cat > /home/vagrant/android-sdk-installer.yml <<-EOF
 platform: linux
 version: '3859397'
@@ -109,12 +108,12 @@ echo 'ANDROID_SDK_HOME=/home/vagrant/android-sdk' >> ~/.bashrc
 
 # Download and setup Android NDK r19
 cd ~
-wget https://dl.google.com/android/repository/android-ndk-r25c-linux-x86_64.zip
-unzip android-ndk-r25c-linux-x86_64.zip
+wget https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
+unzip android-ndk-r25c-linux.zip
 echo 'ANDROID_NDK_HOME=/home/vagrant/android-ndk-r25c' >> ~/.bashrc
 echo 'PATH=$PATH:$ANDROID_NDK_HOME:$ANDROID_SDK_HOME:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/tools/bin:$ANDROID_SDK_HOME/platform-tools' >> ~/.bashrc
 source ~/.bashrc
-rm android-ndk-r25c-linux-x86_64.zip
+rm android-ndk-r25c-linux.zip
 
 # Install python-for-android
 cd /home/vagrant/mi-dev/python-for-android
