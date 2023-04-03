@@ -11,10 +11,11 @@ apt-get update
 apt-get -y install build-essential pkg-config git ruby ant
 apt-get -y install autoconf automake zlib1g-dev libtool
 apt-get -y install bison byacc flex ccache libffi-dev
-apt-get -y install openjdk-8-jdk openjdk-8-jre
+apt-get -y install openjdk-11-jdk openjdk-11-jre
 update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 apt-get -y install python-dev python-setuptools python-wxgtk3.0
-apt-get -y install python3-dev python3-setuptools python3-pip
+# python3-dev python3-opengl python3-wxgtk4.0 python3-dateutil libgsl-dev python3-numpy  wx3.0-headers wx-common libwxgtk3.0-gtk3-dev  libwxbase3.0-dev   
+apt-get -y install python3-dev python3-setuptools python3-pip python3.10-venv
 apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 apt-get -y install libc6 libncurses5 libstdc++6 lib32z1 libbz2-1.0
 apt-get -y install libgtk-3-dev libpulse-dev
