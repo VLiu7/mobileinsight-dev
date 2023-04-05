@@ -161,6 +161,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", privileged: true, inline: $INSTALL_BASE
   config.vm.provision "shell", privileged: false, keep_color: true, inline: $CLONE_REPOS
-  config.vm.provision "shell", privileged: false, keep_color: true, inline: $COMPILE_APK
   config.vm.provision "shell", privileged: false, keep_color: true, inline: $INSTALL_CORE
+  config.vm.provision "shell", privileged: false, keep_color: true, inline: $COMPILE_APK
 end
